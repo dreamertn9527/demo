@@ -47,6 +47,11 @@ public class AbstractDistributedRedisLock {
         }
     }
 
+    public void unlock() {
+        Jedis jedis = JedisUtil.getJedisObject();
+        String value = threadLocal.get();
+        jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(value));
+    }
 
     private boolean tryLock() {
         Jedis jedis = JedisUtil.getJedisObject();
@@ -57,11 +62,5 @@ public class AbstractDistributedRedisLock {
             return true;
         }
         return false;
-    }
-
-    public void unlock() {
-        Jedis jedis = JedisUtil.getJedisObject();
-        String value = threadLocal.get();
-        jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(value));
     }
 }
