@@ -21,6 +21,8 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <junit.version>4.11</junit.version>
+    <redis.clients.version>2.9.0</redis.clients.version>
+    <dreamertn9527.top.common.version>1.0-SNAPSHOT</dreamertn9527.top.common.version>
   </properties>
 
 
@@ -31,6 +33,18 @@
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>${redis.clients.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>dreamertn9527.top</groupId>
+        <artifactId>common</artifactId>
+        <version>${dreamertn9527.top.common.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
