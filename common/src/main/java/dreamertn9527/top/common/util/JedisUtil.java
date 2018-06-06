@@ -1,4 +1,4 @@
-package dreamertn9527.top.common;
+package dreamertn9527.top.common.util;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -32,7 +32,6 @@ public class JedisUtil {
     /**
      * 获得jedis对象
      */
-
     public static Jedis getJedisObject() {
         return pool.getResource();
     }

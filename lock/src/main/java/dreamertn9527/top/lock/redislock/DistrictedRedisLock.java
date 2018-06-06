@@ -1,6 +1,6 @@
 package dreamertn9527.top.lock.redislock;
 
-import dreamertn9527.top.common.JedisUtil;
+import dreamertn9527.top.common.util.JedisUtil;
 import redis.clients.jedis.Jedis;
 
 import java.util.Collections;
