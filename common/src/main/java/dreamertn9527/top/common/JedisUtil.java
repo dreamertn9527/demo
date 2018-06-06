@@ -5,7 +5,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * 类描述:
+ * 类描述: jedis连接池工具类
  *
  * @author:tangniannian
  * @date:2018/6/5
@@ -36,20 +36,4 @@ public class JedisUtil {
     public static Jedis getJedisObject() {
         return pool.getResource();
     }
-
-    public static void main(String[] args) {
-        Jedis jedis = getJedisObject();//获得jedis实例
-
-        //获取jedis实例后可以对redis服务进行一系列的操作
-
-        jedis.set("name", "zhuxun");
-
-        System.out.println(jedis.get("name"));
-
-        jedis.del("name");
-
-        System.out.println(jedis.exists("name"));
-    }
-
-
 }

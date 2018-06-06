@@ -23,6 +23,7 @@
     <junit.version>4.11</junit.version>
     <redis.clients.version>2.9.0</redis.clients.version>
     <dreamertn9527.top.common.version>1.0-SNAPSHOT</dreamertn9527.top.common.version>
+    <com.google.guava.version>23.0</com.google.guava.version>
   </properties>
 
 
@@ -46,6 +47,12 @@
         <artifactId>common</artifactId>
         <version>${dreamertn9527.top.common.version}</version>
       </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${com.google.guava.version}</version>
+        </dependency>
     </dependencies>
   </dependencyManagement>
 

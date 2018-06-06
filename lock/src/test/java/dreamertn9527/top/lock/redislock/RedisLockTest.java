@@ -2,11 +2,6 @@ package dreamertn9527.top.lock.redislock;
 
 import org.junit.Test;
 
-import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 /**
  * 类描述:
  *
@@ -19,7 +14,9 @@ public class RedisLockTest {
 
     private int count = 100;
 
-    private AbstractDistributedRedisLock distriutedRedisLock = new AbstractDistributedRedisLock();
+    private final static String bussinessId = "test";
+
+    private DistrictedRedisLock districtedRedisLock = new DistrictedRedisLock(bussinessId);
 
     @Test
     public void test(){
@@ -47,7 +44,7 @@ public class RedisLockTest {
         public void run() {
             while (count > 0){
                 if(count > 0){
-                    distriutedRedisLock.lock();
+                    districtedRedisLock.lock();
                     try {
                         System.out.println(Thread.currentThread().getName()+" 第"+count+"个");
                         count--;
@@ -55,7 +52,7 @@ public class RedisLockTest {
                     } catch (Exception e){}
 
                     finally {
-                        distriutedRedisLock.unlock();
+                        districtedRedisLock.unlock();
                     }
 
                     try {
