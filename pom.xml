@@ -24,6 +24,7 @@
     <redis.clients.version>2.9.0</redis.clients.version>
     <dreamertn9527.top.common.version>1.0-SNAPSHOT</dreamertn9527.top.common.version>
     <com.google.guava.version>23.0</com.google.guava.version>
+    <cglib.version>3.2.6</cglib.version>
   </properties>
 
 
@@ -53,6 +54,13 @@
             <artifactId>guava</artifactId>
             <version>${com.google.guava.version}</version>
         </dependency>
+
+      <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib</artifactId>
+        <version>${cglib.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
