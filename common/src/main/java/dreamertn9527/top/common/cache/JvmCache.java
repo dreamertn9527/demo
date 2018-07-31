@@ -30,6 +30,7 @@ public class JvmCache {
             .build(new CacheLoader<Object, Object>() {
                 @Override
                 public String load(Object o) throws Exception {
+
                     return null;
                 }
             });

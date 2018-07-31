@@ -39,10 +39,4 @@ public class PropertiesUtil {
             return null;
         }
     }
-
-//    public static void main(String[] args) {
-//        for(int i = 0; i < 10; i++){
-//            System.out.println(getProperties("properties/redis-config.properties", "jedis.pool.maxActive"));
-//        }
-//    }
 }
