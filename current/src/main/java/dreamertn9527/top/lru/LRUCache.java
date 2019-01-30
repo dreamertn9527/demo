@@ -17,53 +17,63 @@ public class LRUCache<K, V> {
 
     private Integer capacity;
 
-    public Object get(Object key){
+    public void set(String key, Object value) {
         LRUNode node = cache.get(key);
-        if(node != null){
-            remove(tail);
-            setHead(node);
-            cache.put(key, node);
-            return node.value;
-        }
-
-        return null;
-    }
-
-    public void set(Object key, Object value){
-        LRUNode node = cache.get(key);
-        if(node != null){
+        if (node != null) {
+            node = cache.get(key);
             node.value = value;
+            remove(node, false);
         } else {
             node = new LRUNode(key, value);
-            if(cache.size() >= capacity){
-                remove(tail);
+            if (cache.size() >= capacity) {
+                // 每次容量不足时先删除最久未使用的元素
+                remove(tail, true);
             }
+            cache.put(key, node);
         }
-
-        cache.put(key, node);
+        // 将刚添加的元素设置为head
         setHead(node);
     }
 
-    private void remove(LRUNode node){
-        if(head.next == null){
-            head = null;
-        } else {
-            tail.pre.next = null;
+    public Object get(String key) {
+        LRUNode node = cache.get(key);
+        if (node != null) {
+            // 将刚操作的元素放到head
+            remove(node, false);
+            setHead(node);
+            return node.value;
         }
-        tail = tail.pre;
-
-        cache.remove(node.key);
+        return null;
     }
 
-    private void setHead(LRUNode node){
-        if(head != null){
+    private void setHead(LRUNode node) {
+        // 先从链表中删除该元素
+        if (head != null) {
             node.next = head;
-            head.pre = node;
+            head.prev = node;
         }
         head = node;
-
-        if(tail == null){
+        if (tail == null) {
             tail = node;
+        }
+    }
+
+    // 从链表中删除此Node，此时要注意该Node是head或者是tail的情形
+    private void remove(LRUNode node, boolean flag) {
+        if (node.prev != null) {
+            node.prev.next = node.next;
+        } else {
+            head = node.next;
+        }
+        if (node.next != null) {
+            node.next.prev = node.prev;
+        } else {
+            tail = node.prev;
+        }
+        node.next = null;
+        node.prev = null;
+        if (flag) {
+            cache.remove(node.key);
         }
     }
 
@@ -77,7 +87,7 @@ public class LRUCache<K, V> {
     private static class LRUNode{
         private Object key;
 
-        private LRUNode pre;
+        private LRUNode prev;
 
         private LRUNode next;
 
@@ -92,21 +102,16 @@ public class LRUCache<K, V> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("size: ").append(cache.size()).append("\n");
-        sb.append("head: ").append("{").append(head.key).append(",").append(head.value).append("}").append("\n");
-        for(Map.Entry<Object, LRUNode> entry : cache.entrySet()){
-            sb.append("{").append(entry.getValue().key).append(",").append(entry.getValue().value);
+
+        LRUNode node = head;
+        while (node != null){
+            sb.append("{").append(node.key).append(",").append(node.value);
             sb.append("},");
+            node = node.next;
         }
         if(sb.length() > 0){
             sb = sb.deleteCharAt(sb.lastIndexOf(","));
         }
-//        // 3
-//        System.out.println(head.value);
-//        // 4
-//        System.out.println(head.next.value);
-//        System.out.println(tail.value);
-
         return sb.toString();
     }
 }

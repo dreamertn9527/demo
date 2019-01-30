@@ -15,6 +15,7 @@ public class Main {
 		System.out.println(cache.toString());
 		
 		System.out.println(cache.get("3"));
+		System.out.println(cache.get("3"));
 		
 		
 		System.out.println(cache.toString());
