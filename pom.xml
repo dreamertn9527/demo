@@ -12,6 +12,7 @@
     <module>lock</module>
     <module>common</module>
     <module>design</module>
+      <module>current</module>
   </modules>
 
   <name>demo</name>
