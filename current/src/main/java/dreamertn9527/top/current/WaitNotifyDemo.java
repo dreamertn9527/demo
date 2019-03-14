@@ -1,6 +1,10 @@
 package dreamertn9527.top.current;
 
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * 两个线程：
  *   第一个输出 1，3，5，7...
@@ -16,6 +20,9 @@ public class WaitNotifyDemo {
     public static Integer COUNT = 0;
 
     public static void main(String[] args) {
+        AtomicLong atomicLong = new AtomicLong();
+        ReentrantLock reentrantLock = new ReentrantLock();
+        reentrantLock.lock();
         ThreadA threadA = new ThreadA();
         threadA.setName("thread-1");
         threadA.start();
